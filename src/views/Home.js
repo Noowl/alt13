@@ -20,10 +20,12 @@ class Home extends Component {
           </div>
         </div>
         <div className="home-subtitle">top artistes</div>
-        <div className="home-top">
-          <TopItem/>
-          <TopItem/>
-          <TopItem/>
+        <div className="home-topHolder">
+          <div className="home-top">
+            <TopItem/>
+            <TopItem/>
+            <TopItem/>
+          </div>
         </div>
       </div>
     );

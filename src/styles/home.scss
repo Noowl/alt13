@@ -45,14 +45,18 @@ $grey-color : #555555;
     margin-bottom: 40px;
   }
 
+  &-topHolder{
+    display: flex;
+    margin-left: -40%;
+    margin-right: -40%;
+  }
+
   &-top{
     border-radius: 50%;
-    width:140vw;
+    width:140%;
     height:140vw;
     overflow:hidden;
     text-align:center;
-    transform: translate(-20%, 0);
-    margin-left: -10px;
     background-color: red;
     display: flex;
     flex-direction: column;
