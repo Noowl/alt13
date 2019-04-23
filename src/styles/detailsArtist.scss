@@ -1,0 +1,65 @@
+$font-stack: Roboto, sans-serif;
+$primaray-color: #000000;
+$grey-color : #555555;
+$orange-color: #FF7F22;
+$purple-color: #BE00DD;
+
+.container{
+  padding: 0 20px;
+}
+
+.artistInfos, .musicsPerYear, .genre, .wordsMostUsed, .albumsRates{
+  border: 2px solid red;
+  background-color: #fff;
+  margin: 20px 0;
+  padding: 10px;
+  h1{
+    font-size: 36px;
+    text-transform: uppercase;
+  }
+  h2{
+    font-size:16px;
+    margin-top:0;
+    text-transform: uppercase;
+    text-align: right;
+    font-weight: 300;
+  }
+}
+
+.artistInfos{
+  display: flex;
+  flex-direction: row;
+}
+
+.wordsMostUsed{
+  &-values{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+
+    &-item{
+      border: 2px solid green;
+      background-image: linear-gradient($orange-color, $purple-color);
+      color: #fff;
+      border-radius: 50%;
+      height:90px;
+      width:90px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      &-word{
+        font-weight: 200;
+        font-size: 16px;
+      }
+
+      &-number{
+        font-weight: 700;
+        font-size: 14px;
+      }
+    }
+  }
+
+}
