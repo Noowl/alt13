@@ -47,10 +47,12 @@ $grey-color : #555555;
 
   &-top{
     border-radius: 50%;
-    width:110vw;
-    height:110vw;
+    width:140vw;
+    height:140vw;
     overflow:hidden;
     text-align:center;
+    transform: translate(-20%, 0);
+    margin-left: -10px;
     background-color: red;
     display: flex;
     flex-direction: column;
