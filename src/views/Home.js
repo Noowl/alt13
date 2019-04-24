@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import TopItem from "../components/TopItem"
 import Header from "../components/Header"
+import TestData from "../datas/testdatatop";
 
 class Home extends Component {
 
@@ -10,17 +11,25 @@ class Home extends Component {
 
   render() {
     return (
-      <div className="home">
+      <div>
+        <div className="home">
         <Header/>
         <div className="home-subtitle">top artistes</div>
+        </div>
         <div className="home-topHolder">
           <div className="home-top">
-            <TopItem/>
-            <TopItem/>
-            <TopItem/>
+            {TestData.map((elm, key) => (
+              <TopItem
+                key={key}
+                name={elm.name}
+                like={elm.like}
+                img={elm.img}
+              />
+            ))}
           </div>
         </div>
       </div>
+      
     );
   }
 }

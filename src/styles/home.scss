@@ -1,7 +1,3 @@
-$font-stack: Roboto, sans-serif;
-$primaray-color: #000000;
-$grey-color : #555555;
-
 .home{
   display: flex;
   flex-direction: column;
@@ -15,24 +11,18 @@ $grey-color : #555555;
     margin-bottom: 40px;
   }
 
-  &-topHolder{
-    display: flex;
-    margin-left: -40%;
-    margin-right: -40%;
-  }
-
   &-top{
     border-radius: 50%;
-    width:140%;
-    height:140vw;
-    overflow:hidden;
-    text-align:center;
-    background-color: red;
+    width: 520px;
+    height: 520px;
+    background-color: white;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    text-align: center;
+    position: absolute;
+    top: 60%; 
+    left: 50%; 
+    transform: translate(-50%, -50%);
 
     &-item{
       font-size: 29px;
@@ -50,7 +40,7 @@ $grey-color : #555555;
           font-weight: bold;
         }
         &-icon{
-            margin-right: 10px;
+          margin-right: 10px;
         }
       }
 
