@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 
 const TopItem = props => (
   <div className="home-top-item">
