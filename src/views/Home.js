@@ -22,8 +22,9 @@ class Home extends Component {
     // //enable pre-flight
     // app.options('*', cors());
 
-    fetch("https://api.musixmatch.com/ws/1.1/chart.artists.get?page=1&page_size=3&country=fr&apikey=b69c809a255cd65c27192ba85b41fa5d", 
-    {mode: 'no-cors', method: 'GET', headers: {'Access-Control-Allow-Origin': 'http://localhost:3000/'}})  
+    //, {mode: 'no-cors', method: 'GET', headers: {'Access-Control-Allow-Origin': 'http://localhost:3000/'}}
+
+    fetch("https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/chart.artists.get?page=1&page_size=3&country=fr&apikey=b69c809a255cd65c27192ba85b41fa5d") 
     .then(res => res.json())
     .then(
       (data) => {
