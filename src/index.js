@@ -9,7 +9,7 @@ import DetailsArtist from "./views/DetailsArtist.js";
 const Root = () => (
   <BrowserRouter>
     <Switch>
-      <Route exact path="/" component={Home} />
+      <Route exact path="/" component={DetailsArtist} />
     </Switch>
   </BrowserRouter>
 );

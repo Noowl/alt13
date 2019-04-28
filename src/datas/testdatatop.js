@@ -7,11 +7,11 @@ export default [
     {
         name: "Miel de Montagne",
         like: 316,
-        img: "favorite-heart-button-purple"
+        img: "favorite-heart-button-orange"
     },
     {
         name: "Angèle",
         like: 314,
-        img: "favorite-heart-button-purple"
+        img: "favorite-heart-button-red"
     },
   ];
