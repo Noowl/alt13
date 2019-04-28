@@ -17,11 +17,7 @@ class DetailsArtist extends Component {
       <div className="container">
         <Header/>
         <ArtistInfos/>
-
-                <h2>Nombre de musiques par année</h2>
-                <MusicsPerYear/>
-        
-
+        <MusicsPerYear/>
         <Genre/>
         <WordsMostUsed/>
         <AlbumsRates/>

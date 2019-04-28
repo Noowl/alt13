@@ -8,29 +8,31 @@ import config from '../configurations/testBarconfig'
     return(
       <div className="musicsPerYear">
         <h2>Nombre de musiques par année</h2>
-        <ResponsiveBar
-                    data={data}
-                    keys={config.keys}
-                    indexBy="années"
-                    margin={config.margin}
-                    padding={0.3}
-                    colors="nivo"
-                    colorBy="id"
-                    defs={config.defs}
-                    fill={config.fill}
-                    borderColor="inherit:darker(1.6)"
-                    axisTop={null}
-                    axisRight={null}
-                    axisBottom={config.axisBottom}
-                    axisLeft={config.axisLeft}
-                    labelSkipWidth={12}
-                    labelSkipHeight={12}
-                    labelTextColor="inherit:darker(1.6)"
-                    animate={true}
-                    motionStiffness={90}
-                    motionDamping={15}
-                    legends={config.legends}
-                />
+        <div className="musicsPerYear-bar">
+          <ResponsiveBar
+                      data={data}
+                      keys={config.keys}
+                      indexBy="années"
+                      margin={config.margin}
+                      padding={0.3}
+                      colors="nivo"
+                      colorBy="id"
+                      defs={config.defs}
+                      fill={config.fill}
+                      borderColor="inherit:darker(1.6)"
+                      axisTop={null}
+                      axisRight={null}
+                      axisBottom={config.axisBottom}
+                      axisLeft={config.axisLeft}
+                      labelSkipWidth={12}
+                      labelSkipHeight={12}
+                      labelTextColor="inherit:darker(1.6)"
+                      animate={true}
+                      motionStiffness={90}
+                      motionDamping={15}
+                      legends={config.legends}
+                  />
+            </div>
       </div>
     )
   }
