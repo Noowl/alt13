@@ -3,7 +3,7 @@ import React from "react";
 const TopItem = props => (
   <div className="home-top-item">
     <div className="home-top-item-value">
-      <div className="home-top-item-value-number"># </div>
+      <div className="home-top-item-value-number"># {props.index}</div>
       <div className="home-top-item-value-name">{props.name}</div>
     </div>
     <div className="home-top-item-likes">
