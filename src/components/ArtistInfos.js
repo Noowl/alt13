@@ -16,7 +16,6 @@ class ArtistInfos extends Component {
     }
   }
 
-
   async fetchArtistInformations(){
      const res = await fetch(apiUrl+"artist.get?artist_id="+this.state.artistId+apiKey);
      const data = await res.json();
@@ -37,14 +36,22 @@ class ArtistInfos extends Component {
     })
   }
 
-  async fetchGetAlbumTrackCount(artistId){
-    const res  = await fetch(apiUrl+"artist.albums.get?artist_id="+artistId+"&g_album_name=1"+apiKey);
+  async fetchAlbumTrackCount(albumId){
+    const res  = await fetch(apiUrl+"album.tracks.get? album_id="+albumId+apiKey);
+    const data = await res.json();
+    this.addNbMusics(data.message.body.track_list.length)
+    console.log(data.message.body.track_list.length);
+  }
+
+
+  async fetchAlbumList(artistId){
+    const res  = await fetch(apiUrl+"artist.albums.get?artist_id="+artistId+"&s_release_date=desc&g_album_name=1"+apiKey);
     const data = await res.json();
 
     console.log(data.message.body.album_list);
     data.message.body.album_list.map(
       (albumItem) => {
-        this.addNbMusics(albumItem.album.album_rating);
+        this.fetchAlbumTrackCount(albumItem.album.album_id)
         console.log("l.50: "+albumItem.album.album_rating)
       }
     )
@@ -54,9 +61,10 @@ class ArtistInfos extends Component {
   componentDidMount() {
     window.scrollTo(0, 0);
   }
+
   async componentWillMount(){
     await this.fetchSearchArtist(this.state.artistName);
-    await this.fetchGetAlbumTrackCount(this.state.artistId);
+    await this.fetchAlbumList(this.state.artistId);
   }
 
   render(){
