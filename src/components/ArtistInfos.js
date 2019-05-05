@@ -9,7 +9,7 @@ class ArtistInfos extends Component {
     this.state = {
       error: null,
       isLoaded: false,
-      artistName: 'Loic Nottet',
+      artistName: 'Coldplay',
       artistId: null,
       totalNumberMusics: 0
       //artistInfos: []
@@ -45,7 +45,7 @@ class ArtistInfos extends Component {
 
 
   async fetchAlbumList(artistId){
-    const res  = await fetch(apiUrl+"artist.albums.get?artist_id="+artistId+"&s_release_date=desc&g_album_name=1"+apiKey);
+    const res  = await fetch(apiUrl+"artist.albums.get?artist_id="+artistId+"&s_release_date=desc"+apiKey);
     const data = await res.json();
 
     console.log(data.message.body.album_list);
