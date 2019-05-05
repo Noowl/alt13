@@ -5,6 +5,11 @@ class Header extends Component {
     myArtist : ""
   }
 
+  setInputValue(myArtist){
+    this.setState({...this.state, myArtist})
+  }
+
+
   render(){
     return(
       <div className="header">
@@ -17,8 +22,11 @@ class Header extends Component {
             type="text"
             required
             value={this.state.myArtist}
-            onChange={e => this.setState({myArtist: e.target.value})}/>
-          <button><img src={require('../assets/search.png')} alt="search icon"/></button>
+            onChange={e => this.setInputValue(e.target.value)}/>
+            {console.log(this.state)}
+          <button>
+            <img src={require('../assets/search.png')} alt="search icon"/>
+          </button>
         </div>
       </div>
     )
