@@ -4,6 +4,8 @@
   justify-content: flex-start;
   padding: 0 20px;
   overflow: hidden;
+  overflow-y: hidden;
+  height: 100vh;
 
   &-subtitle{
     font-size: 29px;
@@ -13,8 +15,8 @@
 
   &-top{
     border-radius: 50%;
-    width: 520px;
-    height: 520px;
+    width: 100vw;
+    height: 100vw;
     background-color: white;
     display: flex;
     flex-direction: column;
@@ -25,7 +27,7 @@
     transform: translate(-50%, -50%);
 
     &-item{
-      font-size: 29px;
+      font-size: 26px;
       margin-top: 20px;
       margin-bottom: 20px;
 
