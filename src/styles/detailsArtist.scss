@@ -29,6 +29,7 @@ $purple-color: #BE00DD;
     width:100%;
     transition: 0.3s;
   }
+}
 
 .genre{
   &-pie{
@@ -38,6 +39,16 @@ $purple-color: #BE00DD;
   }
 }
 
+.albumsRates{
+  height: 26vh;
+  div{
+    height:inherit;
+  }
+  &-line{
+    height:25vh;
+    width:100%;
+    transition: 0.3s;
+  }
 }
 
 .musicsPerYear:hover {
