@@ -5,6 +5,8 @@
   "dependencies": {
     "@babel/core": "7.2.2",
     "@nivo/bar": "^0.56.2",
+    "@nivo/line": "^0.56.2",
+    "@nivo/pie": "^0.56.2",
     "@svgr/webpack": "4.1.0",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "9.0.0",

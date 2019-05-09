@@ -9,7 +9,7 @@ class ArtistInfos extends Component {
     this.state = {
       error: null,
       isLoaded: false,
-      artistName: 'Coldplay',
+      artistName: 'Coldplay ',
       artistId: null,
       totalNumberMusics: 0
       //artistInfos: []
@@ -40,7 +40,6 @@ class ArtistInfos extends Component {
     const res  = await fetch(apiUrl+"album.tracks.get? album_id="+albumId+apiKey);
     const data = await res.json();
     this.addNbMusics(data.message.body.track_list.length)
-    console.log(data.message.body.track_list.length);
   }
 
 
@@ -48,11 +47,9 @@ class ArtistInfos extends Component {
     const res  = await fetch(apiUrl+"artist.albums.get?artist_id="+artistId+"&s_release_date=desc"+apiKey);
     const data = await res.json();
 
-    console.log(data.message.body.album_list);
     data.message.body.album_list.map(
       (albumItem) => {
         this.fetchAlbumTrackCount(albumItem.album.album_id)
-        console.log("l.50: "+albumItem.album.album_rating)
       }
     )
   }
