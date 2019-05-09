@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { ResponsiveLine } from '@nivo/line'
-//import data from '../datas/lineAlbumsRates'
+import data from '../datas/lineAlbumsRates'
 
 class AlbumsRates extends Component {
 
@@ -22,7 +22,7 @@ class AlbumsRates extends Component {
       isLoaded: true,
       topAlbums: Array.from(data.message.body.album_list).map(album => album.album_rating)
     });
-    console.log("RESULTAT 1:" + this.state.topAlbums);
+    console.log("RESULTAT 1:" + Array.from(data.message.body.album_list).map(album => album.album_rating));
     console.log("RESULTAT : " + Array.from(data.message.body.album_list));
 
     // this.setState({
@@ -55,7 +55,7 @@ class AlbumsRates extends Component {
 
         <div className="albumsRates-line">
         <ResponsiveLine
-            data={this.topAlbums}
+            data={data}
             margin={{
                 "top": 50,
                 "right": 110,
@@ -144,4 +144,4 @@ class AlbumsRates extends Component {
   }
 }
 
-export default AlbumsRates; 
+export default AlbumsRates;
