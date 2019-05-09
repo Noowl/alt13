@@ -9,8 +9,8 @@ class ArtistInfos extends Component {
     this.state = {
       error: null,
       isLoaded: false,
-      artistName: 'Coldplay ',
-      artistId: null,
+      artistName: "",
+      artistId: this.props.artistId,
       totalNumberMusics: 0
       //artistInfos: []
     }
@@ -19,13 +19,16 @@ class ArtistInfos extends Component {
   async fetchArtistInformations(){
      const res = await fetch(apiUrl+"artist.get?artist_id="+this.state.artistId+apiKey);
      const data = await res.json();
+     this.setState({
+      artistName: data.message.body.artist.artist_name
+    });
   }
 
   async fetchSearchArtist(artistName){
     const res  = await fetch(apiUrl+"artist.search?q_artist="+artistName+"&page_size=1"+apiKey);
     const data = await res.json();
     this.setState({
-      artistId: data.message.body.artist_list[0].artist.artist_id
+      artistName: data.message.body.artist_list[0].artist.artist_id
     });
   }
 
@@ -60,7 +63,8 @@ class ArtistInfos extends Component {
   }
 
   async componentWillMount(){
-    await this.fetchSearchArtist(this.state.artistName);
+    // await this.fetchSearchArtist(this.state.artistName);
+    await this.fetchArtistInformations();
     await this.fetchAlbumList(this.state.artistId);
   }
 

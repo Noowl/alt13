@@ -7,16 +7,20 @@ import WordsMostUsed from "../components/WordsMostUsed"
 import AlbumsRates from "../components/AlbumsRates"
 
 class DetailsArtist extends Component {
-
+  constructor(props) {
+    super(props);
+  }
   componentDidMount() {
     window.scrollTo(0, 0);
   }
 
   render() {
+    console.log("##### JE SUIS ICI : " + this.props.location.state.artistId);
+    
     return (
       <div className="container">
         <Header/>
-        <ArtistInfos/>
+        <ArtistInfos artistId={this.props.location.state.artistId}/>
         <MusicsPerYear/>
         <Genre/>
         <WordsMostUsed/>

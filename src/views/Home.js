@@ -15,39 +15,12 @@ class Home extends Component {
 
   
   async fetchTopArtists() {
-    // let express = require("express");
-    // const cors = require('cors');
-    // let app = express();
-
-    // //enable pre-flight
-    // app.options('*', cors());
-
-    //, {mode: 'no-cors', method: 'GET', headers: {'Access-Control-Allow-Origin': 'http://localhost:3000/'}}
-
     const res  = await fetch("https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/chart.artists.get?page=1&page_size=3&country=fr&apikey=b69c809a255cd65c27192ba85b41fa5d");
     const data = await res.json();
-    // console.log(data.message.body.artist_list);
     this.setState({
       isLoaded: true,
       topArtists: data.message.body.artist_list.sort((elm1, elm2) => elm2.artist.artist_rating - elm1.artist.artist_rating)
     });
-    console.log("TEST: " + this.state.topArtists[0].artist.artist_name);
-    // .then(res => res.text)
-    // .then(
-    //   (data) => {
-    //     console.log("DATA " + data);
-    //     this.setState({
-    //       isLoaded: true,
-    //       topArtists: data
-    //     });
-    //   },
-    //   (error) => {
-    //     this.setState({
-    //       isLoaded: true,
-    //       error
-    //     });
-    //   }
-    // )
   }
   
   componentDidMount() {

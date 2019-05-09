@@ -1,11 +1,7 @@
-$font-stack: Roboto, sans-serif;
-$primaray-color: #000000;
-$grey-color : #555555;
-
 html, body{
     margin: 0;
     padding: 0;
-    font-family: $font-stack;
+    font-family: Roboto;
 }
 body{
   background-image:url("./assets/background.png");
@@ -17,6 +13,10 @@ body{
   overflow: hidden;
 }
 
+.active, .hover, .link, .visited{
+  text-decoration: none;
+  color:black;
+}
 .header{
   display: flex;
   flex-direction: row;
@@ -31,14 +31,28 @@ body{
   &-search{
     color: $grey-color;
     font-size: 13px;
-    border-bottom: 1.5px solid #000;
     input{
         border: none;
         text-align: right;
+        border-bottom: 1.5px solid #000;
     }
     button{
       border: none;
       background: none;
     }
   }
+
+  &-cross{
+    width: 10px;
+    height: 10px;
+    padding-right: 5px;
+  }
+}
+
+.visible{
+  visibility: visible;
+}
+
+.hidden{
+  visibility: hidden;
 }
