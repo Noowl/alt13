@@ -144,4 +144,4 @@ class AlbumsRates extends Component {
   }
 }
 
-export default AlbumsRates;
+export default AlbumsRates; 
