@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { ResponsiveLine } from '@nivo/line'
-import data from '../datas/lineAlbumsRates'
+//import data from '../datas/lineAlbumsRates'
 
 class AlbumsRates extends Component {
 
@@ -9,28 +9,35 @@ class AlbumsRates extends Component {
     this.state = {
       error: null,
       isLoaded: false,
-      topAlbums: []
+      topAlbums: [
+        {
+          id: "",
+          data: []
+        }
+      ]
     };
   }
 
-  async fetchTopAlbums() {
+  insertDataInState(albumName, albumRate){
+    const topAlbumTmp = this.state.topAlbums
+    const dataTmp = [...topAlbumTmp[0].data, {x: albumName, y: albumRate}]
+    topAlbumTmp[0].data = dataTmp
+    this.setState({topAlbums: topAlbumTmp})
+  }
 
+  async fetchTopAlbums() {
     const res  = await fetch("https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/artist.albums.get?artist_id=1039&s_release_date=desc&g_album_name=1&apikey=b69c809a255cd65c27192ba85b41fa5d");
     const data = await res.json();
-    if (this.state.data) {
-      this.setState({
-        isLoaded: true,
-        topAlbums: data.message.body.album_list.map(elem => elem.album.album_rating)
-      });
-    }
-    console.log("RESULTAT AlbumsRates: " + data.message.body.album_list.map(elem => elem.album.album_rating));
+    data.message.body.album_list.map(
+      (elem) => {
+        this.insertDataInState(elem.album.album_name, elem.album.album_rating)
+    })
   }
 
   async componentDidMount() {
-    await this.fetchTopAlbums();
     window.scrollTo(0, 0);
-
   }
+
   async componentWillMount(){
     await this.fetchTopAlbums();
   }
@@ -47,7 +54,7 @@ class AlbumsRates extends Component {
         data={topAlbums}
         margin={{ top: 50, right: 150, bottom: 50, left: 150 }}
         xScale={{ type: 'point' }}
-        yScale={{ type: 'linear', stacked: true, min: '0', max: '100' }}
+        yScale={{ type: 'linear', stacked: true, min: 0, max: 100 }}
         axisTop={null}
         axisRight={null}
         axisBottom={{
