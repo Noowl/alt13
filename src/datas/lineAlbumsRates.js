@@ -1,47 +1,33 @@
+// Array<{
+//     id:   string | number
+//     data: Array<{
+//         x: number | string | Date
+//         y: number | string | Date
+//     }>
+// }>
 export default [
   {
-    "id": "norway",
-    "color": "hsl(54, 70%, 50%)",
+    "id": "",
     "data": [
       {
-        "x": "plane",
-        "y": 120
+        "x": "album1",
+        "y": 50
       },
       {
-        "x": "helicopter",
-        "y": 241
+        "x": "album2",
+        "y": 65
       },
       {
-        "x": "boat",
-        "y": 108
+        "x": "album3",
+        "y": 77
       },
       {
-        "x": "train",
-        "y": 189
+        "x": "album4",
+        "y": 46
       },
       {
-        "x": "subway",
-        "y": 256
-      },
-      {
-        "x": "bus",
-        "y": 212
-      },
-      {
-        "x": "car",
-        "y": 63
-      },
-      {
-        "x": "moto",
-        "y": 19
-      },
-      {
-        "x": "bicycle",
-        "y": 181
-      },
-      {
-        "x": "others",
-        "y": 43
+        "x": "album5",
+        "y": 50
       }
     ]
   }
