@@ -16,15 +16,15 @@ class DetailsArtist extends Component {
 
   render() {
     console.log("##### JE SUIS ICI : " + this.props.location.state.artistId);
-    
+
     return (
       <div className="container">
         <Header/>
         <ArtistInfos artistId={this.props.location.state.artistId}/>
-        <MusicsPerYear/>
-        <Genre/>
+        <MusicsPerYear artistId={this.props.location.state.artistId}/>
+        <Genre artistId={this.props.location.state.artistId}/>
         <WordsMostUsed/>
-        <AlbumsRates/>
+        <AlbumsRates artistId={this.props.location.state.artistId}/>
       </div>
     );
   }
