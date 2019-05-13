@@ -28,7 +28,7 @@ class AlbumsRates extends Component {
   }
 
   async fetchTopAlbums() {
-    const res  = await fetch(API_URL+"artist.albums.get?artist_id"+artistId+"&s_release_date=desc&g_album_name=1"+API_KEY);
+    const res  = await fetch(API_URL+"artist.albums.get?artist_id="+this.state.artistId+"&s_release_date=desc&g_album_name=1"+API_KEY);
     const data = await res.json();
     data.message.body.album_list.map(
       (elem) => {
@@ -54,15 +54,15 @@ class AlbumsRates extends Component {
         <div className="albumsRates-line">
         <ResponsiveLine
           data={topAlbums}
-          margin={{ top: 50, right: 150, bottom: 50, left: 150 }}
+          margin={{ top: 15, right: 15, bottom: 100, left: 40 }}
           xScale={{ type: 'point' }}
           yScale={{ type: 'linear', stacked: true, min: 0, max: 100 }}
           axisTop={null}
           axisRight={null}
           axisBottom={{
               orient: 'bottom',
-              tickSize: 20,
-              tickPadding: 15,
+              tickSize: 5,
+              tickPadding: 5,
               tickRotation: -20,
               legend: '',
               legendOffset: 36,
@@ -70,7 +70,7 @@ class AlbumsRates extends Component {
           }}
           axisLeft={{
               orient: 'left',
-              tickSize: 20,
+              tickSize: 5,
               tickPadding: 5,
               tickRotation: 0,
               legend: '',
