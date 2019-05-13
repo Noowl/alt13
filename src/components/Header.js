@@ -45,13 +45,18 @@ class Header extends Component {
       await this.fetchSearchArtist(this.state.myArtist);
       console.log("ARTIST to search : " + this.state.myArtist);
       console.log("ARTIST ID : " + this.state.artistId);
-      
+
       if (this.state.artistId != null)
-        this.props.history.push({
-          pathname: '/artist',
-          state: {
-            artistId : this.state.artistId
-          }
+        // this.props.history.push({
+        //   pathname: '/artist',
+        //   state: {
+        //     artistId : this.state.artistId
+        //   }
+          this.props.history.push({
+            pathname: '/artist',
+            state: {
+              artistId : this.state.artistId
+            }
         });
       else{
         this.setState({

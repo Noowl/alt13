@@ -21,10 +21,10 @@ class DetailsArtist extends Component {
       <div className="container">
         <Header/>
         <ArtistInfos artistId={this.props.location.state.artistId}/>
-        <MusicsPerYear/>
+        <MusicsPerYear artistId={this.props.location.state.artistId}/>
         <Genre artistId={this.props.location.state.artistId}/>
         <WordsMostUsed/>
-        <AlbumsRates/>
+        <AlbumsRates artistId={this.props.location.state.artistId}/>
       </div>
     );
   }

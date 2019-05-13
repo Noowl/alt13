@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { ResponsiveLine } from '@nivo/line'
 //import data from '../datas/lineAlbumsRates'
+import { API_KEY, API_URL } from '../helpers/ConstantManager';
 
 class AlbumsRates extends Component {
 
@@ -9,6 +10,7 @@ class AlbumsRates extends Component {
     this.state = {
       error: null,
       isLoaded: false,
+      artistId: this.props.artistId,
       topAlbums: [
         {
           id: "",
@@ -26,7 +28,7 @@ class AlbumsRates extends Component {
   }
 
   async fetchTopAlbums() {
-    const res  = await fetch("https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/artist.albums.get?artist_id=1039&s_release_date=desc&g_album_name=1&apikey=b69c809a255cd65c27192ba85b41fa5d");
+    const res  = await fetch(API_URL+"artist.albums.get?artist_id"+artistId+"&s_release_date=desc&g_album_name=1"+API_KEY);
     const data = await res.json();
     data.message.body.album_list.map(
       (elem) => {
