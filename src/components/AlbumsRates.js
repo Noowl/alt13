@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { ResponsiveLine } from '@nivo/line'
+import _ from "lodash";
 //import data from '../datas/lineAlbumsRates'
 import { API_KEY, API_URL } from '../helpers/ConstantManager';
 
@@ -30,7 +31,10 @@ class AlbumsRates extends Component {
   async fetchTopAlbums() {
     const res  = await fetch(API_URL+"artist.albums.get?artist_id="+this.state.artistId+"&s_release_date=desc&g_album_name=1"+API_KEY);
     const data = await res.json();
-    data.message.body.album_list.map(
+    const groupAlbum = _.groupBy(data.message.body.album_list,"album.album_name");
+    const dataAlbum = _.map(groupAlbum,
+      album => album.sort((elm1, elm2) => Date.parse(elm2.album.updated_time) - Date.parse(elm1.album.updated_time))[0]);
+    dataAlbum.map(
       (elem) => {
         this.insertDataInState(elem.album.album_name, elem.album.album_rating)
     })
