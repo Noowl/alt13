@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import _ from "lodash";
 
 const apiKey = "&apikey=b69c809a255cd65c27192ba85b41fa5d"
 const apiUrl = "https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/"
@@ -24,33 +25,34 @@ class ArtistInfos extends Component {
     });
   }
 
-  async fetchSearchArtist(artistName){
-    const res  = await fetch(apiUrl+"artist.search?q_artist="+artistName+"&page_size=1"+apiKey);
-    const data = await res.json();
-    this.setState({
-      artistName: data.message.body.artist_list[0].artist.artist_id
-    });
-  }
-
   addNbMusics(nbMusics){
-    let totalNumber = this.state.totalNumberMusics+nbMusics;
     this.setState({
-      totalNumberMusics: totalNumber
+      totalNumberMusics: this.state.totalNumberMusics+nbMusics
     })
   }
 
   async fetchAlbumTrackCount(albumId){
+    console.log("Album id = ", albumId);
+    
     const res  = await fetch(apiUrl+"album.tracks.get? album_id="+albumId+apiKey);
     const data = await res.json();
-    this.addNbMusics(data.message.body.track_list.length)
+    console.log("Tracklist= ", data.message.body.track_list);
+    if (data.message.body.track_list.length > 1)
+      this.addNbMusics(data.message.body.track_list.length)
   }
 
 
   async fetchAlbumList(artistId){
-    const res  = await fetch(apiUrl+"artist.albums.get?artist_id="+artistId+"&s_release_date=desc"+apiKey);
+    const res  = await fetch(apiUrl+"artist.albums.get?artist_id="+artistId+"&s_release_date=asc&page_size=100"+apiKey);
     const data = await res.json();
-
-    data.message.body.album_list.map(
+    console.log("TABLEAU ALBUMS:" + data.message.body.album_list[0].album.album_name);
+    
+    const groupAlbum = _.groupBy(data.message.body.album_list,"album.album_name");
+    
+    const dataAlbum = _.map(groupAlbum, 
+      album => album.sort((elm1, elm2) => Date.parse(elm2.album.updated_time) - Date.parse(elm1.album.updated_time))[0]);
+    console.log("GROUP", dataAlbum);
+    dataAlbum.map(
       (albumItem) => {
         this.fetchAlbumTrackCount(albumItem.album.album_id)
       }
