@@ -51,40 +51,40 @@ class AlbumsRates extends Component {
 
         <div className="albumsRates-line">
         <ResponsiveLine
-        data={topAlbums}
-        margin={{ top: 50, right: 150, bottom: 50, left: 150 }}
-        xScale={{ type: 'point' }}
-        yScale={{ type: 'linear', stacked: true, min: 0, max: 100 }}
-        axisTop={null}
-        axisRight={null}
-        axisBottom={{
-            orient: 'bottom',
-            tickSize: 20,
-            tickPadding: 5,
-            tickRotation: 0,
-            legend: '',
-            legendOffset: 36,
-            legendPosition: 'middle'
-        }}
-        axisLeft={{
-            orient: 'left',
-            tickSize: 20,
-            tickPadding: 5,
-            tickRotation: 0,
-            legend: '',
-            legendOffset: -40,
-            legendPosition: 'middle'
-        }}
-        colors={{ scheme: 'nivo' }}
-        pointSize={20}
-        pointColor={{ theme: 'background' }}
-        pointBorderWidth={2}
-        pointBorderColor={{ from: 'serieColor' }}
-        pointLabel="y"
-        pointLabelYOffset={-12}
-        useMesh={true}
-        legends={[]}
-    />
+          data={topAlbums}
+          margin={{ top: 50, right: 150, bottom: 50, left: 150 }}
+          xScale={{ type: 'point' }}
+          yScale={{ type: 'linear', stacked: true, min: 0, max: 100 }}
+          axisTop={null}
+          axisRight={null}
+          axisBottom={{
+              orient: 'bottom',
+              tickSize: 20,
+              tickPadding: 15,
+              tickRotation: -20,
+              legend: '',
+              legendOffset: 36,
+              legendPosition: 'middle'
+          }}
+          axisLeft={{
+              orient: 'left',
+              tickSize: 20,
+              tickPadding: 5,
+              tickRotation: 0,
+              legend: '',
+              legendOffset: -40,
+              legendPosition: 'middle'
+          }}
+          colors={{ scheme: 'nivo' }}
+          pointSize={20}
+          pointColor={{ theme: 'background' }}
+          pointBorderWidth={2}
+          pointBorderColor={{ from: 'serieColor' }}
+          pointLabel="y"
+          pointLabelYOffset={-12}
+          useMesh={true}
+          legends={[]}
+        />
         </div>
       </div>
     )
