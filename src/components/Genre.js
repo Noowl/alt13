@@ -3,7 +3,56 @@ import { ResponsivePie } from '@nivo/pie'
 import data from '../datas/pieGenre'
 import config from '../configurations/pieConfigGenre'
 
+const apiKey = "&apikey=b69c809a255cd65c27192ba85b41fa5d"
+const apiUrl = "https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/"
+
 class Genre extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      error: null,
+      isLoaded: false,
+      artistId: this.props.artistId,
+      genre: [
+        {
+          id: "",
+          label:"",
+          value:0,
+          color:"hsl(346, 70%, 50%)"
+        }
+      ]
+    };
+  }
+
+  // insertDataInState(genreName){
+  //   const genreTmp = this.state.genre
+  //   const dataTmp = [...genreTmp[0].data, {id: genreName, label: genreName,  value: 2}]
+  //   genreTmp[0].data = dataTmp
+  //   this.setState({genre: genreTmp})
+  // }
+
+  async fetchGenre() {
+    const res  = await fetch(apiUrl + "artist.albums.get?artist_id=" + this.state.artistId + "&s_release_date=desc" + apiKey);
+    const data = await res.json();
+    data.message.body.album_list.map(
+      (elem) => {
+        if (elem.album.primary_genres.music_genre_list.length != 0) {
+          console.log("RESULTAT GENRE : " + elem.album.primary_genres);
+        }
+
+        //this.insertDataInState(elem.album.primary_genres.music_genre_list[0].music_genre.music_genre_name)
+    })
+
+  }
+
+  async componentDidMount() {
+    window.scrollTo(0, 0);
+  }
+
+  async componentWillMount(){
+    await this.fetchGenre(this.state.artistId);
+  }
+
   render(){
     return(
       <div className="genre">
