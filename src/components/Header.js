@@ -38,38 +38,41 @@ class Header extends Component {
     this.setState({...this.state, myArtist})
   }
 
-  handleKeyPress = async (e) => {
-    if (e.key === "Enter") {
-      const { onAccept } = this.props;
-      onAccept && onAccept(e.target.value);
-      await this.fetchSearchArtist(this.state.myArtist);
+  async searchArtist(){
+    await this.fetchSearchArtist(this.state.myArtist);
       console.log("ARTIST to search : " + this.state.myArtist);
       console.log("ARTIST ID : " + this.state.artistId);
 
-      if (this.state.artistId != null)
-        // this.props.history.push({
-        //   pathname: '/artist',
-        //   state: {
-        //     artistId : this.state.artistId
-        //   }
-          this.props.history.push({
-            pathname: '/artist',
-            state: {
-              artistId : this.state.artistId
-            }
-        });
-      else{
+    if (this.state.artistId != null)
+      // this.props.history.push({
+      //   pathname: '/artist',
+      //   state: {
+      //     artistId : this.state.artistId
+      //   }
+        this.props.history.push({
+          pathname: '/artist',
+          state: {
+            artistId : this.state.artistId
+          }
+      });
+    else{
+      this.setState({
+        showCross: true,
+        artistId: null
+      });
+      setTimeout(function() {
         this.setState({
-          showCross: true,
+          showCross: false,
           artistId: null
-        });
-        setTimeout(function() {
-          this.setState({
-            showCross: false,
-            artistId: null
-          })}.bind(this), 3000);
-      }
+        })}.bind(this), 3000);
+    } 
+  }
+
+  handleKeyPress = async (e) => {
+    if (e.key === "Enter") {
+      this.searchArtist();
     }
+      
   }
 
 
@@ -91,11 +94,11 @@ class Header extends Component {
             onChange={e => this.setInputValue(e.target.value)}
             onKeyPress={this.handleKeyPress}/>
             {console.log(this.state)}
-          <NavLink  onClick={this.toggleInput} to="/artist">
-            <button>
+          
+            <button onClick={this.searchArtist}>
               <img src={require('../assets/search.png')} alt="search icon"/>
             </button>
-          </NavLink>
+          
         </div>
       </div>
     )

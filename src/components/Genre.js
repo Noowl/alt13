@@ -47,7 +47,7 @@ class Genre extends Component {
     const data = await res.json();
     const groupGenre = _.groupBy(data.message.body.album_list, "elem.album.primary_genres.music_genre_list[0].music_genre.music_genre_name");
     const dataGenre = _.map(groupGenre, genre => genre.sort((elm1, elm2) => Date.parse(elm2.album.updated_time) - Date.parse(elm1.album.updated_time))[0]);
-    dataGenre.map(
+    dataGenre.forEach(
       (elem) => {
         if (elem.album.primary_genres.music_genre_list[0].music_genre.music_genre_name !== "") {
           console.log("RESULTAT 1 GENRE : " + elem.album.primary_genres.music_genre_list[0].music_genre.music_genre_name);
@@ -56,7 +56,7 @@ class Genre extends Component {
           //this.fetchGenreCount(elem.album.primary_genres.music_genre_list[0].music_genre.music_genre_id)
         }
     })
-    console.log("RESULTAT TOUS LES GENRES : " + dataGenre.map(
+    console.log("RESULTAT TOUS LES GENRES : " + dataGenre.forEach(
       (elem) => {
         if (elem.album.primary_genres.music_genre_list[0].music_genre.music_genre_name !== "") {
           this.insertDataInState(elem.album.primary_genres.music_genre_list[0].music_genre.music_genre_name)

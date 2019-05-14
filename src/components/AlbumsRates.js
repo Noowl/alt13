@@ -33,7 +33,7 @@ class AlbumsRates extends Component {
     const groupAlbum = _.groupBy(data.message.body.album_list,"album.album_name");
     const dataAlbum = _.map(groupAlbum,
       album => album.sort((elm1, elm2) => Date.parse(elm2.album.updated_time) - Date.parse(elm1.album.updated_time))[0]);
-    dataAlbum.map(
+    dataAlbum.forEach(
       (elem) => {
         this.insertDataInState(elem.album.album_name, elem.album.album_rating)
     });

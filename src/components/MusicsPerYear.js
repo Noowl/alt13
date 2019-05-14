@@ -18,14 +18,13 @@ import { API_KEY, API_URL } from '../helpers/ConstantManager';
    }
 
    printData(){
-     this.state.data.map(
+     this.state.data.forEach(
        (dataItem) => {
-         console.log("--------------------")
-         console.log("year " + dataItem.year+" number : "+dataItem.number)
-         console.log("--------------------")
-
+         console.log("--------------------");
+         console.log("year " + dataItem.year+" number : "+dataItem.number);
+         console.log("--------------------");
        }
-     )
+     );
    }
 
    isPresent(albumYear, dataAlbumYear){
@@ -35,7 +34,7 @@ import { API_KEY, API_URL } from '../helpers/ConstantManager';
    yearPresentIndex(albumYear){
      let indexTmp = -1;
      let index = -1;
-     this.state.data.map(
+     this.state.data.forEach(
        (dataItem) => {
          indexTmp ++;
          if(this.isPresent(albumYear, dataItem.year)){
@@ -81,7 +80,7 @@ import { API_KEY, API_URL } from '../helpers/ConstantManager';
    async fetchAlbumList(artistId){
      const res  = await fetch(API_URL+"artist.albums.get?artist_id="+artistId+"&s_release_date=desc&page_size=20"+API_KEY);
      const data = await res.json();
-     data.message.body.album_list.map(
+     data.message.body.album_list.forEach(
        (albumItem) => {
          if(albumItem.album.album_release_date.slice(0,4) !== ""){
            this.fetchAlbumTrackCount(albumItem.album.album_id, albumItem.album.album_release_date.slice(0,4))

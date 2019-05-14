@@ -52,7 +52,7 @@ class ArtistInfos extends Component {
     const dataAlbum = _.map(groupAlbum, 
       album => album.sort((elm1, elm2) => Date.parse(elm2.album.updated_time) - Date.parse(elm1.album.updated_time))[0]);
     console.log("GROUP", dataAlbum);
-    dataAlbum.map(
+    dataAlbum.forEach(
       (albumItem) => {
         this.fetchAlbumTrackCount(albumItem.album.album_id)
       }
