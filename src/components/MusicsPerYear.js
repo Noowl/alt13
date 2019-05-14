@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import { ResponsiveBar } from '@nivo/bar'
-import data from '../datas/testBar'
 import config from '../configurations/testBarconfig'
 import { API_KEY, API_URL } from '../helpers/ConstantManager';
 
-let compt = 0;
+//let compt = 0;
 
  class MusicsPerYear extends Component {
    constructor(props){
@@ -30,7 +29,7 @@ let compt = 0;
    }
 
    isPresent(albumYear, dataAlbumYear){
-     return albumYear == dataAlbumYear ? true : false
+     return albumYear === dataAlbumYear ? true : false
    }
 
    yearPresentIndex(albumYear){
@@ -51,7 +50,7 @@ let compt = 0;
    insertYearAndNbTracks(nbMusics, albumYear){
         const yearIsPresentIndex = this.yearPresentIndex(albumYear);
 
-        if(yearIsPresentIndex != -1){
+        if(yearIsPresentIndex !== -1){
           const dataTmp = this.state.data;
           dataTmp[yearIsPresentIndex].number += nbMusics;
           this.setState({data: dataTmp})
@@ -84,7 +83,7 @@ let compt = 0;
      const data = await res.json();
      data.message.body.album_list.map(
        (albumItem) => {
-         if(albumItem.album.album_release_date.slice(0,4) != ""){
+         if(albumItem.album.album_release_date.slice(0,4) !== ""){
            this.fetchAlbumTrackCount(albumItem.album.album_id, albumItem.album.album_release_date.slice(0,4))
            console.log(albumItem.album)
          }

@@ -6,7 +6,9 @@
   overflow: hidden;
   overflow-y: hidden;
   height: 100vh;
-
+  @media (min-width: 908px){
+    padding: 0 45px;
+  }
   &-subtitle{
     font-size: 29px;
     font-weight: 500;
@@ -26,6 +28,10 @@
     left: 50%; 
     transform: translate(-50%, -50%);
 
+    @media (min-width: 708px){
+      width: 708px;
+      height: 708px;
+    }
     &-item{
       font-size: 26px;
       margin-top: 20px;

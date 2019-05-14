@@ -10,7 +10,6 @@ class AlbumsRates extends Component {
     super(props);
     this.state = {
       error: null,
-      isLoaded: false,
       artistId: this.props.artistId,
       topAlbums: [
         {
@@ -37,7 +36,7 @@ class AlbumsRates extends Component {
     dataAlbum.map(
       (elem) => {
         this.insertDataInState(elem.album.album_name, elem.album.album_rating)
-    })
+    });
   }
 
   async componentDidMount() {
@@ -49,7 +48,7 @@ class AlbumsRates extends Component {
   }
 
   render(){
-    const { topAlbums, isLoaded} = this.state;
+    const { topAlbums } = this.state;
     //this.filterState();
     return(
       <div className="albumsRates">

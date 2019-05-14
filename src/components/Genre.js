@@ -49,7 +49,7 @@ class Genre extends Component {
     const dataGenre = _.map(groupGenre, genre => genre.sort((elm1, elm2) => Date.parse(elm2.album.updated_time) - Date.parse(elm1.album.updated_time))[0]);
     dataGenre.map(
       (elem) => {
-        if (elem.album.primary_genres.music_genre_list[0].music_genre.music_genre_name != "") {
+        if (elem.album.primary_genres.music_genre_list[0].music_genre.music_genre_name !== "") {
           console.log("RESULTAT 1 GENRE : " + elem.album.primary_genres.music_genre_list[0].music_genre.music_genre_name);
 
           this.insertDataInState(elem.album.primary_genres.music_genre_list[0].music_genre.music_genre_name)
@@ -58,7 +58,7 @@ class Genre extends Component {
     })
     console.log("RESULTAT TOUS LES GENRES : " + dataGenre.map(
       (elem) => {
-        if (elem.album.primary_genres.music_genre_list[0].music_genre.music_genre_name != "") {
+        if (elem.album.primary_genres.music_genre_list[0].music_genre.music_genre_name !== "") {
           this.insertDataInState(elem.album.primary_genres.music_genre_list[0].music_genre.music_genre_name)
         }
     }));
@@ -75,7 +75,7 @@ class Genre extends Component {
   }
 
   render(){
-    const { genre, isLoaded} = this.state;
+    const { genre } = this.state;
     return(
       <div className="genre">
         <h2>Genres</h2>

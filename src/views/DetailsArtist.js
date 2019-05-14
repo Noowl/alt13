@@ -7,9 +7,7 @@ import WordsMostUsed from "../components/WordsMostUsed"
 import AlbumsRates from "../components/AlbumsRates"
 
 class DetailsArtist extends Component {
-  constructor(props) {
-    super(props);
-  }
+  
   componentDidMount() {
     window.scrollTo(0, 0);
   }

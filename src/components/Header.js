@@ -21,7 +21,7 @@ class Header extends Component {
   async fetchSearchArtist(artistName){
     const res  = await fetch(apiUrl+"artist.search?q_artist="+artistName+"&page_size=1"+apiKey);
     const data = await res.json();
-    if (data.message.body.artist_list.length != 0){
+    if (data.message.body.artist_list.length !== 0){
       this.setState({
         artistId: data.message.body.artist_list[0].artist.artist_id
       });

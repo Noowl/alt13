@@ -71,7 +71,7 @@ class ArtistInfos extends Component {
   }
 
   render(){
-    const {artistName, artistId, totalNumberMusics} = this.state
+    const {artistName, totalNumberMusics} = this.state
     return(
       <div className="artistInfos">
         <div className="artistInfos-name">

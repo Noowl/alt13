@@ -6,6 +6,9 @@ $purple-color: #BE00DD;
 
 .container{
   padding: 0 20px;
+  @media (min-width: 908px){
+    padding: 0 45px;
+  }
 }
 
 .musicsPerYear, .genre, .wordsMostUsed, .albumsRates{
@@ -13,7 +16,7 @@ $purple-color: #BE00DD;
   background-color: #fff;
   margin: 20px 0;
   padding: 20px;
-
+  
   h2{
     font-size:16px;
     margin-top:0;

@@ -1,14 +1,12 @@
 import React, { Component } from "react";
 import TopItem from "../components/TopItem"
 import Header from "../components/Header"
-import TestData from "../datas/testdatatop";
 
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
       error: null,
-      isLoaded: false,
       topArtists: []
     };
   }
@@ -31,7 +29,7 @@ class Home extends Component {
     await this.fetchTopArtists();
   }
   render() {
-    const { topArtists, isLoaded} = this.state;
+    const { topArtists } = this.state;
     const imgColor = ["favorite-heart-button-purple", "favorite-heart-button-orange", "favorite-heart-button-red"];
     
     console.log("Resulat : " + topArtists.length);
