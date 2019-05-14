@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { ResponsivePie } from '@nivo/pie'
-import data from '../datas/pieGenre'
-import config from '../configurations/pieConfigGenre'
+//import data from '../datas/pieGenre'
+//import config from '../configurations/pieConfigGenre'
+import _ from "lodash";
 
 const apiKey = "&apikey=b69c809a255cd65c27192ba85b41fa5d"
 const apiUrl = "https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/"
@@ -24,24 +25,44 @@ class Genre extends Component {
     };
   }
 
-  // insertDataInState(genreName){
-  //   const genreTmp = this.state.genre
-  //   const dataTmp = [...genreTmp[0].data, {id: genreName, label: genreName,  value: 2}]
-  //   genreTmp[0].data = dataTmp
-  //   this.setState({genre: genreTmp})
+  // async fetchGenreCount(genreId){
+  //   console.log("genre id = ", genreId);
+  //
+  //   const res  = await fetch(apiUrl + "artist.albums.get?artist_id=" + this.state.artistId + "&s_release_date=desc" + apiKey);
+  //   const data = await res.json();
+  //   //console.log("Tracklist= ", data.message.body.track_list);
+  //   if (data.album.primary_genres.music_genre_list[0].music_genre.music_genre_id.length > 1)
+  //     this.addNbGenre(data.album.primary_genres.music_genre_list[0].music_genre.music_genre_id.length)
   // }
+
+  insertDataInState(genreName){
+    const genreTmp = this.state.genre
+    const dataTmp = {id: genreName, label: genreName,  value: 4, color:"hsl(346, 70%, 50%)"}
+    genreTmp[0] = dataTmp
+    this.setState({genre: genreTmp})
+  }
 
   async fetchGenre() {
     const res  = await fetch(apiUrl + "artist.albums.get?artist_id=" + this.state.artistId + "&s_release_date=desc" + apiKey);
     const data = await res.json();
-    data.message.body.album_list.map(
+    const groupGenre = _.groupBy(data.message.body.album_list, "elem.album.primary_genres.music_genre_list[0].music_genre.music_genre_name");
+    const dataGenre = _.map(groupGenre, genre => genre.sort((elm1, elm2) => Date.parse(elm2.album.updated_time) - Date.parse(elm1.album.updated_time))[0]);
+    dataGenre.map(
       (elem) => {
-        if (elem.album.primary_genres.music_genre_list.length != 0) {
-          console.log("RESULTAT GENRE : " + elem.album.primary_genres);
-        }
+        if (elem.album.primary_genres.music_genre_list[0].music_genre.music_genre_name != "") {
+          console.log("RESULTAT 1 GENRE : " + elem.album.primary_genres.music_genre_list[0].music_genre.music_genre_name);
 
-        //this.insertDataInState(elem.album.primary_genres.music_genre_list[0].music_genre.music_genre_name)
+          this.insertDataInState(elem.album.primary_genres.music_genre_list[0].music_genre.music_genre_name)
+          //this.fetchGenreCount(elem.album.primary_genres.music_genre_list[0].music_genre.music_genre_id)
+        }
     })
+    console.log("RESULTAT TOUS LES GENRES : " + dataGenre.map(
+      (elem) => {
+        if (elem.album.primary_genres.music_genre_list[0].music_genre.music_genre_name != "") {
+          this.insertDataInState(elem.album.primary_genres.music_genre_list[0].music_genre.music_genre_name)
+        }
+    }));
+
 
   }
 
@@ -54,13 +75,14 @@ class Genre extends Component {
   }
 
   render(){
+    const { genre, isLoaded} = this.state;
     return(
       <div className="genre">
         <h2>Genres</h2>
         <div className="genre-pie">
 
           <ResponsivePie
-                  data={data}
+                  data={genre}
                   margin={{
                       //"top": 40,
                       //"right": 80,
