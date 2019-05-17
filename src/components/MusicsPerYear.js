@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { ResponsiveBar } from '@nivo/bar'
 import config from '../configurations/testBarconfig'
 import { API_KEY, API_URL } from '../helpers/ConstantManager';
+import _ from "lodash";
 
 //let compt = 0;
 
@@ -80,11 +81,15 @@ import { API_KEY, API_URL } from '../helpers/ConstantManager';
    async fetchAlbumList(artistId){
      const res  = await fetch(API_URL+"artist.albums.get?artist_id="+artistId+"&s_release_date=desc&page_size=20"+API_KEY);
      const data = await res.json();
-     data.message.body.album_list.forEach(
+     const groupAlbum = _.groupBy(data.message.body.album_list,"album.album_name");
+     const dataAlbum = _.map(groupAlbum,
+       album => album.sort((elm1, elm2) => Date.parse(elm2.album.updated_time) - Date.parse(elm1.album.updated_time))[0]);
+      // console.log("DATA ALBUMMMMM "+dataAlbum[0].album)
+     dataAlbum.forEach(
        (albumItem) => {
          if(albumItem.album.album_release_date.slice(0,4) !== ""){
            this.fetchAlbumTrackCount(albumItem.album.album_id, albumItem.album.album_release_date.slice(0,4))
-           console.log(albumItem.album)
+           console.log("ALBUM ITEM " + albumItem.album)
          }
        }
      )
