@@ -14,14 +14,7 @@ class Genre extends Component {
       error: null,
       isLoaded: false,
       artistId: this.props.artistId,
-      genre: [
-        {
-          id: "",
-          label:"",
-          value:0,
-          color:"hsl(346, 70%, 50%)"
-        }
-      ]
+      genre: []
     };
   }
 
@@ -36,9 +29,8 @@ class Genre extends Component {
   // }
 
   insertDataInState(genreName){
-    const genreTmp = this.state.genre
     const dataTmp = {id: genreName, label: genreName,  value: 4, color:"hsl(346, 70%, 50%)"}
-    genreTmp[0] = dataTmp
+    const genreTmp = [...this.state.genre, dataTmp]
     this.setState({genre: genreTmp})
   }
 
@@ -49,21 +41,16 @@ class Genre extends Component {
     const dataGenre = _.map(groupGenre, genre => genre.sort((elm1, elm2) => Date.parse(elm2.album.updated_time) - Date.parse(elm1.album.updated_time))[0]);
     dataGenre.forEach(
       (elem) => {
-        if (elem.album.primary_genres.music_genre_list[0].music_genre.music_genre_name !== "") {
-          console.log("RESULTAT 1 GENRE : " + elem.album.primary_genres.music_genre_list[0].music_genre.music_genre_name);
-
-          this.insertDataInState(elem.album.primary_genres.music_genre_list[0].music_genre.music_genre_name)
-          //this.fetchGenreCount(elem.album.primary_genres.music_genre_list[0].music_genre.music_genre_id)
-        }
-    })
-    console.log("RESULTAT TOUS LES GENRES : " + dataGenre.forEach(
-      (elem) => {
-        if (elem.album.primary_genres.music_genre_list[0].music_genre.music_genre_name !== "") {
-          this.insertDataInState(elem.album.primary_genres.music_genre_list[0].music_genre.music_genre_name)
-        }
-    }));
-
-
+        elem.album.primary_genres.music_genre_list.forEach(
+          (elemGenre) => {
+            //if (elemGenre.music_genre.music_genre_name !== "") {
+              console.log("RESULTAT 1 GENRE : " + elemGenre.music_genre.music_genre_name);
+              this.insertDataInState(elemGenre.music_genre.music_genre_name)
+            //}
+          }
+        )
+      }
+    )
   }
 
   async componentDidMount() {
