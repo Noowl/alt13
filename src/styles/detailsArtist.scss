@@ -4,10 +4,44 @@ $grey-color : #555555;
 $orange-color: #FF7F22;
 $purple-color: #BE00DD;
 
+.header-title h1 {
+  @media (min-width: 908px){
+    font-size: 40px;
+  }
+
+}
+
 .container{
   padding: 0 20px;
   @media (min-width: 908px){
     padding: 0 45px;
+  }
+  &-etage {
+    @media (min-width: 708px){
+      display: flex;
+      flex-direction: row;
+    }
+
+    &-componentMusicsPerYear {
+      @media (min-width: 708px){
+        display: flex;
+        flex: 3;
+      }
+    }
+
+    &-componentWordsMostUded {
+      @media (min-width: 708px){
+        display: flex;
+        flex: 1;
+      }
+    }
+
+    &-componentGenre {
+      @media (min-width: 708px){
+        display: flex;
+        flex: 3;
+      }
+    }
   }
 }
 
@@ -16,7 +50,8 @@ $purple-color: #BE00DD;
   background-color: #fff;
   margin: 20px 0;
   padding: 20px;
-  
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+
   h2{
     font-size:16px;
     margin-top:0;
@@ -29,15 +64,16 @@ $purple-color: #BE00DD;
 .musicsPerYear {
   &-bar{
     height:25vh;
-    width:100%;
+    width:50vh;
     transition: 0.3s;
+    margin: 5%;
   }
 }
 
 .genre{
   &-pie{
-    height:25vh;
-    width:100%;
+    height:35vh;
+    width:50vh;
     transition: 0.3s;
   }
 }
@@ -54,10 +90,6 @@ $purple-color: #BE00DD;
   }
 }
 
-.musicsPerYear:hover {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}
-
 .artistInfos{
   display: flex;
   flex-direction: row;
@@ -65,16 +97,23 @@ $purple-color: #BE00DD;
 
   &-name{
     //border: 2px solid green;
-    flex:3;
+    flex:4;
+    @media (min-width: 708px){
+      flex: 2;
+    }
     h1{
       font-size: 36px;
       text-transform: uppercase;
       font-weight:500;
+      @media (min-width: 708px){
+        height: 130px;
+        transform: translateY(25%);
+      }
     }
   }
 
   &-nbMusics{
-    flex:2;
+    flex:1;
     //border: 2px solid green;
     display: flex;
     flex-direction: column;
@@ -85,6 +124,13 @@ $purple-color: #BE00DD;
     background-repeat: no-repeat;
     background-size: 65%;
     margin-right:-20px;
+    @media (min-width: 708px){
+      flex: 1;
+      background-size: 60%;
+    @media (min-width: 708px){
+      background-size: 90%;
+      }
+    }
 
     &-number{
       font-size: 24px;
@@ -96,9 +142,16 @@ $purple-color: #BE00DD;
       font-weight: 300;
     }
   }
+  .responsiveInfos{
+    @media (min-width: 708px){
+      flex: 6;
+      background-size: 130px;
+    }
   }
+}
 
   .wordsMostUsed{
+    width: 30vh;
   &-values{
     display: flex;
     flex-direction: row;

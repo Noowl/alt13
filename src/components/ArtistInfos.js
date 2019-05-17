@@ -33,7 +33,7 @@ class ArtistInfos extends Component {
 
   async fetchAlbumTrackCount(albumId){
     console.log("Album id = ", albumId);
-    
+
     const res  = await fetch(apiUrl+"album.tracks.get? album_id="+albumId+apiKey);
     const data = await res.json();
     console.log("Tracklist= ", data.message.body.track_list);
@@ -46,10 +46,10 @@ class ArtistInfos extends Component {
     const res  = await fetch(apiUrl+"artist.albums.get?artist_id="+artistId+"&s_release_date=asc&page_size=100"+apiKey);
     const data = await res.json();
     console.log("TABLEAU ALBUMS:" + data.message.body.album_list[0].album.album_name);
-    
+
     const groupAlbum = _.groupBy(data.message.body.album_list,"album.album_name");
-    
-    const dataAlbum = _.map(groupAlbum, 
+
+    const dataAlbum = _.map(groupAlbum,
       album => album.sort((elm1, elm2) => Date.parse(elm2.album.updated_time) - Date.parse(elm1.album.updated_time))[0]);
     console.log("GROUP", dataAlbum);
     dataAlbum.forEach(
@@ -80,6 +80,8 @@ class ArtistInfos extends Component {
         <div className="artistInfos-nbMusics">
           <div className="artistInfos-nbMusics-number">{totalNumberMusics}</div>
           <div className="artistInfos-nbMusics-music">musiques</div>
+        </div>
+        <div className="responsiveInfos">
         </div>
       </div>
     )

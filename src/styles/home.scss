@@ -14,7 +14,7 @@
     font-weight: 500;
     margin-bottom: 40px;
   }
-  
+
   &-top{
     border-radius: 50%;
     width: 100vw;
@@ -24,8 +24,8 @@
     flex-direction: column;
     justify-content: center;
     position: absolute;
-    top: 60%; 
-    left: 50%; 
+    top: 60%;
+    left: 50%;
     transform: translate(-50%, -50%);
 
     @media (min-width: 708px){
@@ -64,6 +64,9 @@
   }
 }
 
-h1 {
+.header-title h1 {
   font-weight: 900;
+  @media (min-width: 708px){
+    font-size:40px;
+  }
 }
