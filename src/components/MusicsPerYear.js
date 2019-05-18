@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import { ResponsiveBar } from '@nivo/bar'
-import config from '../configurations/testBarconfig'
-import { API_KEY, API_URL } from '../helpers/ConstantManager';
 import _ from "lodash";
+import config from '../configurations/Barconfig'
 
-//let compt = 0;
+import { API_KEY, API_URL } from '../helpers/ConstantManager';
+import { isPresent } from '../helpers/FunctionManager';
+
+
 
  class MusicsPerYear extends Component {
    constructor(props){
@@ -14,22 +16,7 @@ import _ from "lodash";
        isLoaded: false,
        artistId: this.props.artistId,
        data: [],
-       //numberMusics: 0
      }
-   }
-
-   printData(){
-     this.state.data.forEach(
-       (dataItem) => {
-         console.log("--------------------");
-         console.log("year " + dataItem.year+" number : "+dataItem.number);
-         console.log("--------------------");
-       }
-     );
-   }
-
-   isPresent(albumYear, dataAlbumYear){
-     return albumYear === dataAlbumYear ? true : false
    }
 
    yearPresentIndex(albumYear){
@@ -38,7 +25,7 @@ import _ from "lodash";
      this.state.data.forEach(
        (dataItem) => {
          indexTmp ++;
-         if(this.isPresent(albumYear, dataItem.year)){
+         if(isPresent(albumYear, dataItem.year)){
            index = indexTmp;
          }
        }
@@ -89,7 +76,7 @@ import _ from "lodash";
        (albumItem) => {
          if(albumItem.album.album_release_date.slice(0,4) !== ""){
            this.fetchAlbumTrackCount(albumItem.album.album_id, albumItem.album.album_release_date.slice(0,4))
-           console.log("ALBUM ITEM " + albumItem.album)
+           //console.log("ALBUM ITEM " + albumItem.album)
          }
        }
      )

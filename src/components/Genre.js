@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import { ResponsivePie } from '@nivo/pie'
-//import data from '../datas/pieGenre'
-//import config from '../configurations/pieConfigGenre'
 import _ from "lodash";
 
-const apiKey = "&apikey=b69c809a255cd65c27192ba85b41fa5d"
-const apiUrl = "https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/"
+import { API_KEY, API_URL } from '../helpers/ConstantManager';
+import { isPresent } from '../helpers/FunctionManager';
 
 class Genre extends Component {
   constructor(props) {
@@ -15,40 +13,53 @@ class Genre extends Component {
       isLoaded: false,
       artistId: this.props.artistId,
       genre: []
-    };
+    }
   }
 
-  // async fetchGenreCount(genreId){
-  //   console.log("genre id = ", genreId);
-  //
-  //   const res  = await fetch(apiUrl + "artist.albums.get?artist_id=" + this.state.artistId + "&s_release_date=desc" + apiKey);
-  //   const data = await res.json();
-  //   //console.log("Tracklist= ", data.message.body.track_list);
-  //   if (data.album.primary_genres.music_genre_list[0].music_genre.music_genre_id.length > 1)
-  //     this.addNbGenre(data.album.primary_genres.music_genre_list[0].music_genre.music_genre_id.length)
-  // }
+  genrePresentIndex(genreName){
+    let indexTmp = -1;
+    let index = -1;
+    this.state.genre.forEach(
+      (genreItem) => {
+        indexTmp++;
+        if(isPresent(genreName, genreItem.label)){
+          index = indexTmp;
+        }
+      }
+    )
+    return index;
+  }
 
   insertDataInState(genreName){
-    const dataTmp = {id: genreName, label: genreName,  value: 4, color:"hsl(346, 70%, 50%)"}
-    const genreTmp = [...this.state.genre, dataTmp]
+    const genreIsPresentIndex = this.genrePresentIndex(genreName);
+    let genreTmp;
+    if(genreIsPresentIndex !== -1){
+      genreTmp = this.state.genre;
+      genreTmp[genreIsPresentIndex].value += 1;
+    }
+
+    else{
+      const genreItemTmp = {id: genreName, label: genreName,  value: 1, color:"hsl(346, 70%, 50%)"}
+       genreTmp = [...this.state.genre, genreItemTmp]
+    }
     this.setState({genre: genreTmp})
   }
 
   async fetchGenre() {
-    const res  = await fetch(apiUrl + "artist.albums.get?artist_id=" + this.state.artistId + "&s_release_date=desc" + apiKey);
+    const res  = await fetch(API_URL + "artist.albums.get?artist_id=" + this.state.artistId + "&s_release_date=desc" + API_KEY);
     const data = await res.json();
-    const groupGenre = _.groupBy(data.message.body.album_list, "elem.album.primary_genres.music_genre_list[0].music_genre.music_genre_name");
-    const dataGenre = _.map(groupGenre, genre => genre.sort((elm1, elm2) => Date.parse(elm2.album.updated_time) - Date.parse(elm1.album.updated_time))[0]);
-    dataGenre.forEach(
+    const groupAlbum = _.groupBy(data.message.body.album_list,"album.album_name");
+    const dataAlbum = _.map(groupAlbum,
+      album => album.sort((elm1, elm2) => Date.parse(elm2.album.updated_time) - Date.parse(elm1.album.updated_time))[0]);
+    dataAlbum.forEach(
       (elem) => {
-        elem.album.primary_genres.music_genre_list.forEach(
-          (elemGenre) => {
-            //if (elemGenre.music_genre.music_genre_name !== "") {
-              console.log("RESULTAT 1 GENRE : " + elemGenre.music_genre.music_genre_name);
-              this.insertDataInState(elemGenre.music_genre.music_genre_name)
-            //}
-          }
-        )
+        if(elem.album.primary_genres.music_genre_list.length !== 0){
+          elem.album.primary_genres.music_genre_list.forEach(
+            (genreItem) => {
+              this.insertDataInState(genreItem.music_genre.music_genre_name)
+            }
+          )
+        }
       }
     )
   }
@@ -73,7 +84,7 @@ class Genre extends Component {
                   margin={{
                       //"top": 40,
                       //"right": 80,
-                      "bottom": 60,
+                      "bottom": 100,
                       //"left": 80
                   }}
                   innerRadius={0.5}
@@ -176,11 +187,11 @@ class Genre extends Component {
                   legends={[
                       {
                           "anchor": "bottom",
-                          "direction": "row",
-                          "translateY": 56,
-                          "translateX": 20,
-                          "itemWidth": 80,
-                          "itemHeight": 14,
+                          "direction": "column",
+                          "translateY": 90,
+                          "translateX": 0,
+                          "itemWidth": 200,
+                          "itemHeight": 20,
                           "itemTextColor": "#999",
                           "symbolSize": 14,
                           "symbolShape": "circle",
