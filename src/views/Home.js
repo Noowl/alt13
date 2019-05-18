@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import TopItem from "../components/TopItem"
 import Header from "../components/Header"
+import { API_KEY, API_URL } from '../helpers/ConstantManager';
 
 class Home extends Component {
   constructor(props) {
@@ -13,7 +14,7 @@ class Home extends Component {
 
   
   async fetchTopArtists() {
-    const res  = await fetch("https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/chart.artists.get?page=1&page_size=3&country=fr&apikey=b69c809a255cd65c27192ba85b41fa5d");
+    const res  = await fetch(API_URL+"chart.artists.get?page=1&page_size=3&country=fr"+API_KEY);
     const data = await res.json();
     this.setState({
       isLoaded: true,
@@ -25,14 +26,14 @@ class Home extends Component {
     window.scrollTo(0, 0);
     
   }
+
   async componentWillMount(){
     await this.fetchTopArtists();
   }
+
   render() {
     const { topArtists } = this.state;
     const imgColor = ["favorite-heart-button-purple", "favorite-heart-button-orange", "favorite-heart-button-red"];
-    
-    console.log("Resulat : " + topArtists.length);
     return (
       <div className="home">
         <Header/>

@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { NavLink, withRouter } from 'react-router-dom';
-
-const apiKey = "&apikey=b69c809a255cd65c27192ba85b41fa5d"
-const apiUrl = "https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/"
+import { API_KEY, API_URL } from '../helpers/ConstantManager';
 
 class Header extends Component {
   constructor(props) {
@@ -19,7 +17,7 @@ class Header extends Component {
   }
 
   async fetchSearchArtist(artistName){
-    const res  = await fetch(apiUrl+"artist.search?q_artist="+artistName+"&page_size=1"+apiKey);
+    const res  = await fetch(API_URL+"artist.search?q_artist="+artistName+"&page_size=1"+API_KEY);
     const data = await res.json();
     if (data.message.body.artist_list.length !== 0){
       this.setState({
@@ -40,20 +38,13 @@ class Header extends Component {
 
   async searchArtist(){
     await this.fetchSearchArtist(this.state.myArtist);
-      console.log("ARTIST to search : " + this.state.myArtist);
-      console.log("ARTIST ID : " + this.state.artistId);
-
+    /*const searchParams = new URLSearchParams();
+    searchParams.set("artistId", this.state.artistId);*/
+    const searching = "?artistId="+this.state.artistId;
     if (this.state.artistId != null)
-      // this.props.history.push({
-      //   pathname: '/artist',
-      //   state: {
-      //     artistId : this.state.artistId
-      //   }
         this.props.history.push({
           pathname: '/artist',
-          state: {
-            artistId : this.state.artistId
-          }
+          search: searching
       });
     else{
       this.setState({
