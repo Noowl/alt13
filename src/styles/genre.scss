@@ -1,0 +1,17 @@
+.genre{
+  @media (max-width: 708px){
+  }
+  width: 100%;
+  padding: 0 20px;
+  &-pie{
+    @media (max-width: 708px){
+      height:25vh;
+      width:100%;
+      transition: 0.3s;
+    }
+    height:25vh;
+    width:100%;
+    transition: 0.3s;
+    display: flex;
+  }
+}

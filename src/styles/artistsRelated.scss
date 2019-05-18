@@ -1,0 +1,56 @@
+.artistRelated{
+  @media (max-width: 708px){
+  }
+  padding: 0 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+&-values{
+  @media (max-width: 708px){
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+  }
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+
+  &-item{
+    background-image: linear-gradient($orange-color, $purple-color);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    &:nth-child(1){
+      height:90px;
+      width: 90px;
+    }
+
+    &:nth-child(2){
+      height:100px;
+      width: 100px;
+    }
+
+    &:nth-child(3){
+      height:80px;
+      width: 80px;
+    }
+
+    &-word{
+      font-weight: 200;
+      font-size: 16px;
+    }
+
+    &-number{
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+  }
+}
+}
