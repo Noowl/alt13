@@ -15,7 +15,7 @@ body{
 
 .active, .hover, .link, .visited{
   text-decoration: none;
-  color:black;
+  color: $primaray-color;
 }
 .header{
   display: flex;
@@ -26,6 +26,11 @@ body{
   &-title h1{
     font-size: 29px;
     font-weight: black;
+    font-weight: 900;
+    color: $primaray-color;
+    @media (min-width: 708px){
+      font-size:40px;
+    }
   }
 
   &-search{
@@ -34,7 +39,7 @@ body{
     input{
         border: none;
         text-align: right;
-        border-bottom: 1.5px solid #000;
+        border-bottom: 1.5px solid $primaray-color;
     }
     button{
       border: none;
