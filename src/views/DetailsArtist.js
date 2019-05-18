@@ -31,7 +31,7 @@ class DetailsArtist extends Component {
     const params = queryString.parse(this.props.location.search);
     // window.location.reload()
     console.log("##### JE SUIS ICI : " + this.props.location.search);
-   
+
     return (
       <div className="container">
       <Header/>
@@ -40,7 +40,7 @@ class DetailsArtist extends Component {
         <div className="container-etage-componentMusicsPerYear">
           <MusicsPerYear artistId={params.artistId}/>
         </div>
-        <div className="container-etage-componentWordsMostUded">
+        <div className="container-etage-componentArtistsRelated">
           <ArtistsRelated artistId={params.artistId}/>
         </div>
         <div className="container-etage-componentGenre">

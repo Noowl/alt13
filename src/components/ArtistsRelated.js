@@ -30,12 +30,12 @@ class ArtistsRelated extends Component {
     const { artistsRelated } = this.state;
 
     return(
-      <div className="wordsMostUsed">
+      <div className="artistRelated">
         <h2>Artistes similaires</h2>
-        <div className="wordsMostUsed-values">
+        <div className="artistRelated-values">
           {artistsRelated.map((elm, key) => (
-            <div className="wordsMostUsed-values-item" key={key}>
-              <div className="wordsMostUsed-values-item-word">{elm.artist.artist_name}</div>
+            <div className="artistRelated-values-item" key={key}>
+              <div className="artistRelated-values-item-word">{elm.artist.artist_name}</div>
             </div>
           ))}
         </div>

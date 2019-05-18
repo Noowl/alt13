@@ -1,45 +1,50 @@
-.header-title h1 {
-  @media (min-width: 908px){
-    font-size: 40px;
-  }
-
-}
+$font-stack: Roboto, sans-serif;
+$primaray-color: #000000;
+$grey-color : #555555;
+$orange-color: #FF7F22;
+$purple-color: #BE00DD;
 
 .container{
   padding: 0 20px;
+  width: 100%;
   @media (min-width: 908px){
     padding: 0 45px;
   }
-  &-etage {
-    @media (min-width: 708px){
+  &-etage{
+    @media (max-width: 708px){
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
     }
-
-    &-componentMusicsPerYear {
-      @media (min-width: 708px){
+    display: flex;
+    flex-direction: row;
+    &-componentGenre{
+      @media (max-width: 708px){
         display: flex;
-        flex: 3;
+        flex-direction: column;
       }
+      flex:3;
+      display: flex;
     }
-
-    &-componentWordsMostUded {
-      @media (min-width: 708px){
+    &-componentMusicsPerYear{
+      @media (max-width: 708px){
         display: flex;
-        flex: 1;
+        flex-direction: column;
       }
+      flex:3;
+      display: flex;
     }
-
-    &-componentGenre {
-      @media (min-width: 708px){
+    &-componentArtistRelated{
+      @media (max-width: 708px){
         display: flex;
-        flex: 3;
+        flex-direction: column;
       }
+      flex: 1;
+      display: flex;
     }
   }
 }
 
-.musicsPerYear, .genre, .wordsMostUsed, .albumsRates{
+.musicsPerYear, .genre, .artistRelated, .albumsRates{
   background-color: #fff;
   margin: 20px 0;
   padding: 20px;
@@ -54,35 +59,6 @@
   }
 }
 
-.musicsPerYear {
-  &-bar{
-    height:25vh;
-    width:50vh;
-    transition: 0.3s;
-    margin: 5%;
-  }
-}
-
-.genre{
-  &-pie{
-    height:35vh;
-    width:50vh;
-    transition: 0.3s;
-  }
-}
-
-.albumsRates{
-  height: 50vh;
-  div{
-    height:inherit;
-  }
-  &-line{
-    height:25vh;
-    width:100%;
-    transition: 0.3s;
-  }
-}
-
 .artistInfos{
   display: flex;
   flex-direction: row;
@@ -90,24 +66,30 @@
 
   &-name{
     //border: 2px solid green;
-    flex:4;
-    @media (min-width: 708px){
-      flex: 2;
-    }
+    flex:3;
     h1{
       font-size: 36px;
       text-transform: uppercase;
       font-weight:500;
-      @media (min-width: 708px){
-        height: 130px;
-        transform: translateY(25%);
-      }
     }
   }
 
   &-nbMusics{
-    width: 100px;
-    height: 100px;
+    @media (max-width: 708px){
+      flex:2;
+      //border: 2px solid green;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-image: url("./assets/musicNumberBg.svg");
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: 65%;
+      margin-right:-20px;
+    }
+    flex:2;
+    //border: 2px solid green;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -115,76 +97,24 @@
     background-image: url("./assets/musicNumberBg.svg");
     background-position: center center;
     background-repeat: no-repeat;
-    background-size: 100%;
+    background-size: 35%;
     margin-right:-20px;
-    @media (max-width: 708px){
-      flex: 2;
-      width: 100px;
-    // @media (max-width: 708px){
-    //   background-size: 90%;
-    //   }
-    }
-
     &-number{
+      @media (max-width: 708px){
+        font-size: 24px;
+        font-weight:700;
+      }
       font-size: 24px;
       font-weight:700;
     }
 
     &-music{
+      @media (max-width: 708px){
+        font-size: 12px;
+        font-weight: 300;
+      }
       font-size: 12px;
       font-weight: 300;
     }
   }
-  .responsiveInfos{
-    @media (min-width: 708px){
-      flex: 6;
-      background-size: 130px;
-    }
   }
-}
-
-  .wordsMostUsed{
-    width: 30vh;
-  &-values{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-
-    &-item{
-      background-image: linear-gradient($orange-color, $purple-color);
-      color: #fff;
-      border-radius: 50%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-
-      &:nth-child(1){
-        height:90px;
-        width: 90px;
-      }
-
-      &:nth-child(2){
-        height:100px;
-        width: 100px;
-      }
-
-      &:nth-child(3){
-        height:80px;
-        width: 80px;
-      }
-
-      &-word{
-        font-weight: 200;
-        font-size: 16px;
-      }
-
-      &-number{
-        font-weight: 700;
-        font-size: 14px;
-      }
-
-    }
-  }
-}
