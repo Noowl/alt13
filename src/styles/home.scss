@@ -17,8 +17,6 @@
 
   &-top{
     border-radius: 50%;
-    width: 100vw;
-    height: 100vw;
     background-color: white;
     display: flex;
     flex-direction: column;
@@ -27,10 +25,12 @@
     top: 60%;
     left: 50%;
     transform: translate(-50%, -50%);
+    width: 608px;
+    height: 608px;
 
-    @media (min-width: 708px){
-      width: 708px;
-      height: 708px;
+    @media (max-width: 768px){
+      width: 450px;
+      height: 450px;
     }
     &-item{
       font-size: 26px;
