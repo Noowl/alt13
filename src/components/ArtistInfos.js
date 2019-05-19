@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import _ from "lodash";
-import { API_KEY, API_URL } from '../helpers/ConstantManager';
+import { fetchAlbumTrackCount } from '../helpers/FunctionManager';
 
 class ArtistInfos extends Component {
   constructor(props){
@@ -8,18 +7,11 @@ class ArtistInfos extends Component {
     this.state = {
       error: null,
       isLoaded: false,
-      artistName: "",
+      artistName: this.props.artistName,
       artistId: this.props.artistId,
+      albumList: this.props.albumList,
       totalNumberMusics: 0
     }
-  }
-
-  async fetchArtistInformations(){
-     const res = await fetch(API_URL+"artist.get?artist_id="+this.state.artistId+API_KEY);
-     const data = await res.json();
-     this.setState({
-      artistName: data.message.body.artist.artist_name
-    });
   }
 
   addNbMusics(nbMusics){
@@ -28,36 +20,24 @@ class ArtistInfos extends Component {
     })
   }
 
-  async fetchAlbumTrackCount(albumId){
-    const res  = await fetch(API_URL+"album.tracks.get? album_id="+albumId+API_KEY);
-    const data = await res.json();
-
+  async getAlbumTrackCount(albumId){
+    const data = await fetchAlbumTrackCount(albumId);
     if (data.message.body.track_list.length > 1)
       this.addNbMusics(data.message.body.track_list.length)
   }
 
-
   async fetchAlbumList(artistId){
-    const res  = await fetch(API_URL+"artist.albums.get?artist_id="+artistId+"&s_release_date=asc&page_size=100"+API_KEY);
-    const data = await res.json();
-    const groupAlbum = _.groupBy(data.message.body.album_list,"album.album_name");
-
-    const dataAlbum = _.map(groupAlbum,
-      album => album.sort((elm1, elm2) => Date.parse(elm2.album.updated_time) - Date.parse(elm1.album.updated_time))[0]);
-    dataAlbum.forEach(
-      (albumItem) => {
-        this.fetchAlbumTrackCount(albumItem.album.album_id)
-      }
-    )
+    this.state.albumList.forEach(
+    (albumItem) => {
+      this.getAlbumTrackCount(albumItem.album.album_id)
+    })
   }
-
 
   componentDidMount() {
     window.scrollTo(0, 0);
   }
 
   async componentWillMount(){
-    await this.fetchArtistInformations();
     await this.fetchAlbumList(this.state.artistId);
   }
 

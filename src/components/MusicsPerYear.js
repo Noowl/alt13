@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import { ResponsiveBar } from '@nivo/bar'
-import _ from "lodash";
 import config from '../configurations/Barconfig'
 
 import { API_KEY, API_URL } from '../helpers/ConstantManager';
-import { isPresent } from '../helpers/FunctionManager';
+import { isPresent, fetchAlbumTrackCount } from '../helpers/FunctionManager';
 
 
 
@@ -15,6 +14,7 @@ import { isPresent } from '../helpers/FunctionManager';
        error: null,
        isLoaded: false,
        artistId: this.props.artistId,
+       albumList: this.props.albumList,
        data: [],
      }
    }
@@ -56,32 +56,20 @@ import { isPresent } from '../helpers/FunctionManager';
         }
    }
 
-
-    async fetchAlbumTrackCount(albumId, albumYear){
-     const res  = await fetch(API_URL+"album.tracks.get? album_id="+albumId+API_KEY);
-     const data = await res.json();
+    async getAlbumTrackCount(albumId, albumYear){
+     const data = await fetchAlbumTrackCount(albumId);
      const nbMusics = await data.message.body.track_list.length;
     this.insertYearAndNbTracks(nbMusics, albumYear);
    }
 
-
    async fetchAlbumList(artistId){
-     const res  = await fetch(API_URL+"artist.albums.get?artist_id="+artistId+"&s_release_date=desc&page_size=20"+API_KEY);
-     const data = await res.json();
-     const groupAlbum = _.groupBy(data.message.body.album_list,"album.album_name");
-     const dataAlbum = _.map(groupAlbum,
-       album => album.sort((elm1, elm2) => Date.parse(elm2.album.updated_time) - Date.parse(elm1.album.updated_time))[0]);
-      // console.log("DATA ALBUMMMMM "+dataAlbum[0].album)
-     dataAlbum.forEach(
+     this.state.albumList.forEach(
        (albumItem) => {
          if(albumItem.album.album_release_date.slice(0,4) !== ""){
-           this.fetchAlbumTrackCount(albumItem.album.album_id, albumItem.album.album_release_date.slice(0,4))
-           //console.log("ALBUM ITEM " + albumItem.album)
+           this.getAlbumTrackCount(albumItem.album.album_id, albumItem.album.album_release_date.slice(0,4));
          }
-       }
-     )
-   }
-
+       })
+     }
 
    componentDidMount() {
      window.scrollTo(0, 0);

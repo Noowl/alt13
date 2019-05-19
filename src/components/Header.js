@@ -1,29 +1,45 @@
 import React, { Component } from "react";
 import { NavLink, withRouter } from 'react-router-dom';
-import { API_KEY, API_URL } from '../helpers/ConstantManager';
+import { fetchAlbumList, fetchArtistRelated, fetchSearchArtist } from '../helpers/FunctionManager';
 
 class Header extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       open: false,
       showCross: false,
       artistId: null,
-      myArtist: ''
+      artistName: '',
+      myArtist: '',
+      artistsRelated: [],
+      albumList: []
     };
 
     this.toggleInput = this.toggleInput.bind(this);
   }
 
-  async fetchSearchArtist(artistName){
-    const res  = await fetch(API_URL+"artist.search?q_artist="+artistName+"&page_size=1"+API_KEY);
-    const data = await res.json();
+  async getSearchArtist(artistName){
+    const data = await fetchSearchArtist(artistName);
     if (data.message.body.artist_list.length !== 0){
       this.setState({
-        artistId: data.message.body.artist_list[0].artist.artist_id
+        artistId: data.message.body.artist_list[0].artist.artist_id,
+        artistName: data.message.body.artist_list[0].artist.artist_name,
       });
     }
+  }
+
+  async getAlbumList(){
+    const dataAlbum = await fetchAlbumList(this.state.artistId)
+    this.setState({
+      albumList: dataAlbum
+    })
+  }
+
+  async getArtistRelated(){
+    const data = await fetchArtistRelated(this.state.artistId);
+    this.setState({
+      artistsRelated: data.message.body.artist_list
+    });
   }
 
   toggleInput() {
@@ -36,16 +52,24 @@ class Header extends Component {
     this.setState({...this.state, myArtist})
   }
 
-  async searchArtist(){
-    await this.fetchSearchArtist(this.state.myArtist);
-    /*const searchParams = new URLSearchParams();
-    searchParams.set("artistId", this.state.artistId);*/
+  async getArtist(){
+    await this.getSearchArtist(this.state.myArtist);
+
     const searching = "?artistId="+this.state.artistId;
-    if (this.state.artistId != null)
-        this.props.history.push({
-          pathname: '/artist',
-          search: searching
+    if (this.state.artistId != null){
+      await this.getAlbumList(this.state.artistId);
+      await this.getArtistRelated(this.state.artistId);
+      this.props.history.push({
+        pathname: '/artist',
+        state: {
+          albumList: this.state.albumList,
+          artistName: this.state.artistName,
+          artistsRelated: this.state.artistsRelated
+        },
+        search: searching
       });
+    }
+
     else{
       this.setState({
         showCross: true,
@@ -56,16 +80,14 @@ class Header extends Component {
           showCross: false,
           artistId: null
         })}.bind(this), 3000);
-    } 
+    }
   }
 
   handleKeyPress = async (e) => {
     if (e.key === "Enter") {
-      this.searchArtist();
+      this.getArtist();
     }
-      
   }
-
 
   render(){
     return(
@@ -84,12 +106,6 @@ class Header extends Component {
             value={this.state.myArtist}
             onChange={e => this.setInputValue(e.target.value)}
             onKeyPress={this.handleKeyPress}/>
-            {console.log(this.state)}
-          
-            <button onClick={this.searchArtist}>
-              <img src={require('../assets/search.png')} alt="search icon"/>
-            </button>
-          
         </div>
       </div>
     )

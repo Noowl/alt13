@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import { ResponsivePie } from '@nivo/pie'
-import _ from "lodash";
-
-import { API_KEY, API_URL } from '../helpers/ConstantManager';
 import { isPresent } from '../helpers/FunctionManager';
+import { API_KEY, API_URL } from '../helpers/ConstantManager';
 
 class Genre extends Component {
   constructor(props) {
@@ -12,6 +10,7 @@ class Genre extends Component {
       error: null,
       isLoaded: false,
       artistId: this.props.artistId,
+      albumList: this.props.albumList,
       genre: []
     }
   }
@@ -46,22 +45,17 @@ class Genre extends Component {
   }
 
   async fetchGenre() {
-    const res  = await fetch(API_URL + "artist.albums.get?artist_id=" + this.state.artistId + "&s_release_date=desc" + API_KEY);
-    const data = await res.json();
-    const groupAlbum = _.groupBy(data.message.body.album_list,"album.album_name");
-    const dataAlbum = _.map(groupAlbum,
-      album => album.sort((elm1, elm2) => Date.parse(elm2.album.updated_time) - Date.parse(elm1.album.updated_time))[0]);
-    dataAlbum.forEach(
-      (elem) => {
-        if(elem.album.primary_genres.music_genre_list.length !== 0){
-          elem.album.primary_genres.music_genre_list.forEach(
-            (genreItem) => {
-              this.insertDataInState(genreItem.music_genre.music_genre_name)
-            }
-          )
-        }
+    await fetch(API_URL + "artist.albums.get?artist_id=" + this.state.artistId + "&s_release_date=desc" + API_KEY);
+    this.state.albumList.forEach(
+    (elem) => {
+      if(elem.album.primary_genres.music_genre_list.length !== 0){
+        elem.album.primary_genres.music_genre_list.forEach(
+          (genreItem) => {
+            this.insertDataInState(genreItem.music_genre.music_genre_name)
+          }
+        )
       }
-    )
+    })
   }
 
   async componentDidMount() {
@@ -69,14 +63,14 @@ class Genre extends Component {
   }
 
   async componentWillMount(){
-    await this.fetchGenre(this.state.artistId);
+    await this.fetchGenre();
   }
 
   render(){
     const { genre } = this.state;
     return(
       <div className="genre">
-        <h2>Genres</h2>
+        <h2>Genres par nombre d'albums</h2>
         <div className="genre-pie">
 
           <ResponsivePie
@@ -213,29 +207,3 @@ class Genre extends Component {
 }
 
 export default Genre;
-// <ResponsivePie
-//             data={data}
-//             margin={config.margin}
-//             colors={config.colors}
-//
-//             defs={config.defs}
-//             fill={config.fill}
-//             borderColor={config.borderColor}
-//             animate={config.animate}
-//             pixelRatio= {1}
-//             innerRadius= {0.65}
-//             enableRadialLabels= {false}
-//             radialLabelsSkipAngle= {10}
-//             radialLabelsTextXOffset= {6}
-//             radialLabelsTextColor= {"#333333"}
-//             radialLabelsLinkOffset= {0}
-//             radialLabelsLinkDiagonalLength= {16}
-//             radialLabelsLinkHorizontalLength= {24}
-//             radialLabelsLinkStrokeWidth= {1}
-//             slicesLabelsSkipAngle= {10}
-//             slicesLabelsTextColor= {"#999999"}
-//             animate= {true}
-//             motionStiffness= {90}
-//             motionDamping= {15}
-//             legends= {config.legends}
-//   />
