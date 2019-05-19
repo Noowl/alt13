@@ -1,12 +1,12 @@
-
 .albumsRates{
   height: 50vh;
+  padding: 10px 10px 20px 10px;
+
   div{
     height:inherit;
   }
   &-line{
     height:25vh;
-    width:100%;
     transition: 0.3s;
   }
 }

@@ -37,17 +37,17 @@ class DetailsArtist extends Component {
       <Header/>
       <ArtistInfos artistId={params.artistId}/>
       <div className="container-etage">
-        <div className="container-etage-componentMusicsPerYear">
+        <div className="container-etage-componentChart">
           <MusicsPerYear artistId={params.artistId}/>
         </div>
-        <div className="container-etage-componentArtistsRelated">
+        <div className="container-etage-componentChart">
           <ArtistsRelated artistId={params.artistId}/>
         </div>
-        <div className="container-etage-componentGenre">
+        <div className="container-etage-componentChart">
           <Genre artistId={params.artistId}/>
         </div>
       </div>
-          <AlbumsRates artistId={params.artistId}/>
+      <AlbumsRates artistId={params.artistId}/>
     </div>
     );
   }

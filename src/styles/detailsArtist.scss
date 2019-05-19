@@ -5,42 +5,35 @@ $orange-color: #FF7F22;
 $purple-color: #BE00DD;
 
 .container{
-  padding: 0 20px;
-  width: 100%;
-  @media (min-width: 908px){
+  padding: 0 10px;
+  flex-wrap: wrap;
+
+  @media screen and (min-width: 908px){
     padding: 0 45px;
   }
+
   &-etage{
-    @media (max-width: 708px){
-      display: flex;
-      flex-direction: column;
-    }
     display: flex;
     flex-direction: row;
-    &-componentGenre{
-      @media (max-width: 708px){
-        display: flex;
-        flex-direction: column;
-      }
-      flex:3;
-      display: flex;
+    flex-wrap: wrap;
+    // justify-content: space-between;
+
+    &-componentChart{
+      flex:1;
+      height: auto;
+      width: 90vw;
     }
-    &-componentMusicsPerYear{
-      @media (max-width: 708px){
+
+    @media screen and (min-width: 768px){
+      // height: 40vh;
+      &-componentChart{
         display: flex;
-        flex-direction: column;
+        flex:1;
+        justify-content: center;
+        width: 25vw;
       }
-      flex:3;
-      display: flex;
     }
-    &-componentArtistRelated{
-      @media (max-width: 708px){
-        display: flex;
-        flex-direction: column;
-      }
-      flex: 1;
-      display: flex;
-    }
+
   }
 }
 
@@ -65,7 +58,6 @@ $purple-color: #BE00DD;
   justify-content: space-around;
 
   &-name{
-    //border: 2px solid green;
     flex:3;
     h1{
       font-size: 36px;
@@ -75,21 +67,11 @@ $purple-color: #BE00DD;
   }
 
   &-nbMusics{
-    @media (max-width: 708px){
-      flex:2;
-      //border: 2px solid green;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background-image: url("./assets/musicNumberBg.svg");
-      background-position: center center;
-      background-repeat: no-repeat;
+    @media screen and (max-width: 708px){
       background-size: 65%;
       margin-right:-20px;
     }
     flex:2;
-    //border: 2px solid green;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -99,20 +81,13 @@ $purple-color: #BE00DD;
     background-repeat: no-repeat;
     background-size: 35%;
     margin-right:-20px;
+
     &-number{
-      @media (max-width: 708px){
-        font-size: 24px;
-        font-weight:700;
-      }
       font-size: 24px;
       font-weight:700;
     }
 
     &-music{
-      @media (max-width: 708px){
-        font-size: 12px;
-        font-weight: 300;
-      }
       font-size: 12px;
       font-weight: 300;
     }
