@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import { ResponsiveBar } from '@nivo/bar'
-import config from '../configurations/Barconfig'
-
-import { API_KEY, API_URL } from '../helpers/ConstantManager';
+import { ResponsiveBar } from '@nivo/bar';
+import config from '../configurations/Barconfig';
 import { isPresent, fetchAlbumTrackCount } from '../helpers/FunctionManager';
 
 
